@@ -43,6 +43,34 @@ namespace JPBM
             }
         }
 
+        public void Update(Rifa rifa)
+        {
+           
+            string sql = "UPDATE dbo.RIFA SET pago=@Pago, nome=@Nome, vendido = @Vendido WHERE numero = @Numero";
+
+            using (var con = new SqlConnection(GetSQLConnection()))
+            {
+                try
+                {
+                    con.Open();
+                    var command = new SqlCommand(sql, con);
+                    command.Parameters.AddWithValue("@Pago", rifa.Pago);
+                    command.Parameters.AddWithValue("@Nome", rifa.Nome);
+                    command.Parameters.AddWithValue("@Vendido", rifa.Vendido);
+                    command.Parameters.AddWithValue("@Numero", rifa.Numero);
+
+                    command.ExecuteReader();
+
+                    con.Close(); con.Dispose();
+
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+        }
+
         public List<Rifa> GetAll()
         {
             string sql = "SELECT * FROM Rifa";

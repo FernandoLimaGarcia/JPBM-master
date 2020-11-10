@@ -37,8 +37,37 @@ namespace JPBM.Controllers
                 return View();
         }
 
-        public async Task<IActionResult> indexx(RifaViewModel rifa)
+        public async Task<IActionResult> Indexx(RifaViewModel rifa)
         {
+            Conexao c = new Conexao();
+            var listaNumeros = c.GetAll();
+            var numeros = rifa.Numeros.Split(",");
+
+            foreach(var n in numeros)
+            {
+                foreach(var ln in listaNumeros)
+                {
+                    if (ln.Numero == Convert.ToInt32(n))
+                    {
+                        if(ln.Vendido == true)
+                        {
+
+                        }
+                        else
+                        {
+                            Rifa r = new Rifa();
+                            r.Nome = rifa.Nome;
+                            r.Pago = rifa.Pago;
+                            r.Vendido = true;
+                            r.Numero = ln.Numero;
+
+                            c.Update(r);
+                        }
+                        
+                    }
+                }
+
+            }
             return  View();
         }
 

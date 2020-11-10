@@ -7,9 +7,9 @@ namespace JPBM.Models
 {
     public class RifaViewModel
     {
-        public bool N0 {get;set;}
-        public bool N1 {get;set;}
-        public bool N2 {get;set;}
+        public string Numeros {get;set;}
+        public string Nome {get;set;}
+        public bool Pago {get;set;}
         public List<Vendas> vendas { get; set; }
     }
 }

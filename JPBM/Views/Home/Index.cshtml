@@ -1,25 +1,25 @@
 ﻿@model RifaViewModel
  
 @{
-    ViewData["Title"] = "Home Page";
-    var lista1 = ViewData["Lista1"] as List<Rifa>;
-    var lista2 = ViewData["Lista2"] as List<Rifa>;
-    var lista3 = ViewData["Lista3"] as List<Rifa>;
-    var lista4 = ViewData["Lista4"] as List<Rifa>;
-    var lista5 = ViewData["Lista5"] as List<Rifa>;
-    var lista6 = ViewData["Lista6"] as List<Rifa>;
-    var lista7 = ViewData["Lista7"] as List<Rifa>;
-    var lista8 = ViewData["Lista8"] as List<Rifa>;
-    var lista9 = ViewData["Lista9"] as List<Rifa>;
-    var lista10 = ViewData["Lista10"] as List<Rifa>;
-    var lista11 = ViewData["Lista11"] as List<Rifa>;
-    var lista12 = ViewData["Lista12"] as List<Rifa>;
-    var lista13 = ViewData["Lista13"] as List<Rifa>;
-    var lista14 = ViewData["Lista14"] as List<Rifa>;
-    var lista15 = ViewData["Lista15"] as List<Rifa>;
+//ViewData["Title"] = "Home Page";
+//var lista1 = ViewData["Lista1"] as List<Rifa>;
+//var lista2 = ViewData["Lista2"] as List<Rifa>;
+//var lista3 = ViewData["Lista3"] as List<Rifa>;
+//var lista4 = ViewData["Lista4"] as List<Rifa>;
+//var lista5 = ViewData["Lista5"] as List<Rifa>;
+//var lista6 = ViewData["Lista6"] as List<Rifa>;
+//var lista7 = ViewData["Lista7"] as List<Rifa>;
+//var lista8 = ViewData["Lista8"] as List<Rifa>;
+//var lista9 = ViewData["Lista9"] as List<Rifa>;
+//var lista10 = ViewData["Lista10"] as List<Rifa>;
+//var lista11 = ViewData["Lista11"] as List<Rifa>;
+//var lista12 = ViewData["Lista12"] as List<Rifa>;
+//var lista13 = ViewData["Lista13"] as List<Rifa>;
+//var lista14 = ViewData["Lista14"] as List<Rifa>;
+//var lista15 = ViewData["Lista15"] as List<Rifa>;
 
-    int PermissaoCount = 0;
-    var PermissaoCount1 = "";
+//int PermissaoCount = 0;
+//var PermissaoCount1 = "";
 }
 
     <form method="post" enctype="multipart/form-data" asp-controller="Home" asp-action="Indexx">
@@ -27,7 +27,30 @@
         <h1 class="display-4">Rifa - Juntos por um bem Maior</h1>
 
     </div>
+
+
     <div>
+        <input type="text" id="numero" asp-for="Numeros"/>
+        <input type="text" id="nome" asp-for="Nome"/>
+        <input type="checkbox" id="pago" asp-for="Pago"/>
+
+        <input type="submit" value="enviar"/>
+       
+    </div>
+
+    </form>
+
+
+
+
+
+
+
+
+
+
+
+    @*<div>
         <col ="6">
         <table class="table">
             <tbody>
@@ -135,8 +158,8 @@
         </table>
         <input type="submit" />
         </col>
-    </div>
-</form>
+    </div>*@
+
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
