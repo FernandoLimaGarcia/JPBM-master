@@ -10,10 +10,53 @@ namespace JPBM.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        public IActionResult Index(RifaViewModel rifa)
         {
 
-            Conexao c = new Conexao(); 
+            Conexao c = new Conexao();
+            var listaNumeros = c.GetAll();
+
+            if(rifa.Nome != null && rifa.Numeros != null){
+                var numeros = rifa.Numeros.Split(",");
+                var res = 0;
+                var x = new List<int>();
+                foreach (var n in numeros)
+                {
+                    foreach (var ln in listaNumeros)
+                    {
+                        if (ln.Numero == Convert.ToInt32(n))
+                        {
+                            if (ln.Vendido == true)
+                            {
+                                res = 1;
+                                x.Add(ln.Numero);
+                                ViewBag.r = 1;
+                            }
+                            else
+                            {
+                                Rifa r = new Rifa();
+                                r.Nome = rifa.Nome;
+                                r.Pago = rifa.Pago;
+                                r.Vendido = true;
+                                r.Numero = ln.Numero;
+
+                                c.Update(r);
+                            }
+
+                        }
+                    }
+                }
+
+                
+
+
+                var result = String.Join(", ", x.ToArray());
+
+                ViewBag.r = result;
+                ViewBag.res = res;
+            }
+
+           
 
 
             //for (var x = 1; x <= 150; x++)
@@ -27,49 +70,22 @@ namespace JPBM.Controllers
             //}
 
             var listas = c.ListaOrdenada();
-                var aux = 1;
-                foreach (var lista in listas)
-                {
-                    ViewData["Lista" + aux] = lista;
-                    aux++;
-                }
-
-                return View();
-        }
-
-        public async Task<IActionResult> Indexx(RifaViewModel rifa)
-        {
-            Conexao c = new Conexao();
-            var listaNumeros = c.GetAll();
-            var numeros = rifa.Numeros.Split(",");
-
-            foreach(var n in numeros)
+            var aux = 1;
+            foreach (var lista in listas)
             {
-                foreach(var ln in listaNumeros)
-                {
-                    if (ln.Numero == Convert.ToInt32(n))
-                    {
-                        if(ln.Vendido == true)
-                        {
-
-                        }
-                        else
-                        {
-                            Rifa r = new Rifa();
-                            r.Nome = rifa.Nome;
-                            r.Pago = rifa.Pago;
-                            r.Vendido = true;
-                            r.Numero = ln.Numero;
-
-                            c.Update(r);
-                        }
-                        
-                    }
-                }
-
+                ViewData["Lista" + aux] = lista;
+                aux++;
             }
-            return  View();
+
+            return View();
         }
+
+        public IActionResult Rifas()
+        {
+            return View();
+        }
+
+       
 
         public IActionResult About()
         {

@@ -108,7 +108,7 @@ namespace JPBM
 
             var lis = GetAll();
 
-            var aux1 = 10;
+            var aux1 = 15;
             var x1 = 1;
 
             foreach (var l in lis)
@@ -132,7 +132,7 @@ namespace JPBM
                     r.Numero = l.Numero;
                     r.Pago = l.Pago;
                     r.Vendido = l.Vendido;
-                    aux1 = aux1 + 10;
+                    aux1 = aux1 + 15;
                     x1++;
                     lista.Add(r);
                 }

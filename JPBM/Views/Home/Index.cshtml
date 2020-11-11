@@ -1,28 +1,32 @@
 ﻿@model RifaViewModel
  
 @{
-//ViewData["Title"] = "Home Page";
-//var lista1 = ViewData["Lista1"] as List<Rifa>;
-//var lista2 = ViewData["Lista2"] as List<Rifa>;
-//var lista3 = ViewData["Lista3"] as List<Rifa>;
-//var lista4 = ViewData["Lista4"] as List<Rifa>;
-//var lista5 = ViewData["Lista5"] as List<Rifa>;
-//var lista6 = ViewData["Lista6"] as List<Rifa>;
-//var lista7 = ViewData["Lista7"] as List<Rifa>;
-//var lista8 = ViewData["Lista8"] as List<Rifa>;
-//var lista9 = ViewData["Lista9"] as List<Rifa>;
-//var lista10 = ViewData["Lista10"] as List<Rifa>;
-//var lista11 = ViewData["Lista11"] as List<Rifa>;
-//var lista12 = ViewData["Lista12"] as List<Rifa>;
-//var lista13 = ViewData["Lista13"] as List<Rifa>;
-//var lista14 = ViewData["Lista14"] as List<Rifa>;
-//var lista15 = ViewData["Lista15"] as List<Rifa>;
+    ViewData["Title"] = "Home Page";
+    var res = ViewBag.res;
+    var r = ViewBag.r;
+    var lista1 = ViewData["Lista1"] as List<Rifa>;
+    var lista2 = ViewData["Lista2"] as List<Rifa>;
+    var lista3 = ViewData["Lista3"] as List<Rifa>;
+    var lista4 = ViewData["Lista4"] as List<Rifa>;
+    var lista5 = ViewData["Lista5"] as List<Rifa>;
+    var lista6 = ViewData["Lista6"] as List<Rifa>;
+    var lista7 = ViewData["Lista7"] as List<Rifa>;
+    var lista8 = ViewData["Lista8"] as List<Rifa>;
+    var lista9 = ViewData["Lista9"] as List<Rifa>;
+    var lista10 = ViewData["Lista10"] as List<Rifa>;
+    //var lista11 = ViewData["Lista11"] as List<Rifa>;
+    //var lista12 = ViewData["Lista12"] as List<Rifa>;
+    //var lista13 = ViewData["Lista13"] as List<Rifa>;
+    //var lista14 = ViewData["Lista14"] as List<Rifa>;
+    //var lista15 = ViewData["Lista15"] as List<Rifa>;
 
-//int PermissaoCount = 0;
-//var PermissaoCount1 = "";
+    //int PermissaoCount = 0;
+    //var PermissaoCount1 = "";
 }
 
-    <form method="post" enctype="multipart/form-data" asp-controller="Home" asp-action="Indexx">
+    <input type="hidden" id="r" name="r" value="@res" />
+    <input type="hidden" id="res" name="res" value="@r" />
+    <form method="post" enctype="multipart/form-data" asp-controller="Home" asp-action="Index">
     <div class="text-center">
         <h1 class="display-4">Rifa - Juntos por um bem Maior</h1>
 
@@ -30,8 +34,11 @@
 
 
     <div>
+        <label>Digite os numeros separados por virgula: exp: 1,45,32,58 </label>
         <input type="text" id="numero" asp-for="Numeros"/>
+        <label> Digite o nome do comprardor: </label>
         <input type="text" id="nome" asp-for="Nome"/>
+        <label> Esta pago ? </label>
         <input type="checkbox" id="pago" asp-for="Pago"/>
 
         <input type="submit" value="enviar"/>
@@ -42,128 +49,179 @@
 
 
 
-
-
-
-
-
-
-
-
-    @*<div>
-        <col ="6">
+    <div>
+        
         <table class="table">
             <tbody>
                 <tr>
                     @foreach (var x in lista1)
                     {
-                        <input type="text" name="Permissoes[@PermissaoCount].Ativo" value="@x.Vendido" id="permissao-@PermissaoCount" style="display: none" />
-                        PermissaoCount1 = "N" + PermissaoCount;
+                        <input type="text" value="@x.Vendido" style="display: none" />
+
                         @if (x.Vendido == true)
                         {
-                            <td>@x.Numero <input type="checkbox" checked name="Permissoes[@PermissaoCount].Ativo" onchange="AtualizarPermissoes(this, @PermissaoCount)" /></td>
+                            <td>@x.Numero <input type="checkbox" checked  /></td>
                         }
                         else
-                        { //precisa disso? pq ele só atualizará uma vez, e, das outras, verá no próprio banco de dados se já foi checado
-                            <td>@x.Numero <input type="checkbox" name="Permissoes[@PermissaoCount].Ativo" onchange="AtualizarPermissoes(this, @PermissaoCount)" /></td>
+                        {
+                            <td>@x.Numero <input type="checkbox" disabled /></td>
                         }
-                        PermissaoCount++;
                     }
                 </tr>
                 <tr>
                     @foreach (var x in lista2)
                     {
-                        <td>@x.Numero <input type="checkbox" id="@x.Numero" checked name="@x.Vendido" /></td>
+                        <input type="text" value="@x.Vendido" style="display: none" />
+
+                        @if (x.Vendido == true)
+                        {
+                            <td>@x.Numero <input type="checkbox" checked  /></td>
+                        }
+                        else
+                        {
+                            <td>@x.Numero <input type="checkbox" disabled /></td>
+                        }
                     }
                 </tr>
                 <tr>
                     @foreach (var x in lista3)
                     {
-                        <td>@x.Numero <input type="checkbox" id="@x.Numero" checked name="@x.Vendido" /></td>
+                        <input type="text" value="@x.Vendido" style="display: none" />
+
+                        @if (x.Vendido == true)
+                        {
+                            <td>@x.Numero <input type="checkbox" checked  /></td>
+                        }
+                        else
+                        {
+                            <td>@x.Numero <input type="checkbox" disabled /></td>
+                        }
                     }
                 </tr>
                 <tr>
                     @foreach (var x in lista4)
                     {
-                        <td>@x.Numero <input type="checkbox" id="@x.Numero" checked name="@x.Vendido" /></td>
+                        <input type="text" value="@x.Vendido" style="display: none" />
+
+                        @if (x.Vendido == true)
+                        {
+                            <td>@x.Numero <input type="checkbox" checked  /></td>
+                        }
+                        else
+                        {
+                            <td>@x.Numero <input type="checkbox" disabled /></td>
+                        }
                     }
                 </tr>
                 <tr>
                     @foreach (var x in lista5)
                     {
-                        <td>@x.Numero <input type="checkbox" id="@x.Numero" checked name="@x.Vendido" /></td>
+                        <input type="text" value="@x.Vendido" style="display: none" />
+
+                        @if (x.Vendido == true)
+                        {
+                            <td>@x.Numero <input type="checkbox" checked  /></td>
+                        }
+                        else
+                        {
+                            <td>@x.Numero <input type="checkbox" disabled /></td>
+                        }
                     }
                 </tr>
                 <tr>
                     @foreach (var x in lista6)
                     {
-                        <td>@x.Numero <input type="checkbox" id="@x.Numero" checked name="@x.Vendido" /></td>
+                        <input type="text" value="@x.Vendido" style="display: none" />
+
+                        @if (x.Vendido == true)
+                        {
+                            <td>@x.Numero <input type="checkbox" checked  /></td>
+                        }
+                        else
+                        {
+                            <td>@x.Numero <input type="checkbox" disabled /></td>
+                        }
                     }
                 </tr>
                 <tr>
                     @foreach (var x in lista7)
                     {
-                        <td>@x.Numero <input type="checkbox" id="@x.Numero" checked name="@x.Vendido" /></td>
+                        <input type="text" value="@x.Vendido" style="display: none" />
+
+                        @if (x.Vendido == true)
+                        {
+                            <td>@x.Numero <input type="checkbox" checked  /></td>
+                        }
+                        else
+                        {
+                            <td>@x.Numero <input type="checkbox" disabled /></td>
+                        }
                     }
                 </tr>
                 <tr>
                     @foreach (var x in lista8)
                     {
-                        <td>@x.Numero <input type="checkbox" id="@x.Numero" checked name="@x.Vendido" /></td>
+                        <input type="text" value="@x.Vendido" style="display: none" />
+
+                        @if (x.Vendido == true)
+                        {
+                            <td>@x.Numero <input type="checkbox" checked  /></td>
+                        }
+                        else
+                        {
+                            <td>@x.Numero <input type="checkbox" disabled /></td>
+                        }
                     }
                 </tr>
                 <tr>
                     @foreach (var x in lista9)
                     {
-                        <td>@x.Numero <input type="checkbox" id="@x.Numero" checked name="@x.Vendido" /></td>
+                        <input type="text" value="@x.Vendido" style="display: none" />
+
+                        @if (x.Vendido == true)
+                        {
+                            <td>@x.Numero <input type="checkbox" checked  /></td>
+                        }
+                        else
+                        {
+                            <td>@x.Numero <input type="checkbox" disabled /></td>
+                        }
                     }
                 </tr>
                 <tr>
                     @foreach (var x in lista10)
                     {
-                        <td>@x.Numero <input type="checkbox" id="@x.Numero" checked name="@x.Vendido" /></td>
-                    }
-                </tr>
-                <tr>
-                    @foreach (var x in lista11)
-                    {
-                        <td>@x.Numero <input type="checkbox" id="@x.Numero" checked name="@x.Vendido" /></td>
-                    }
-                </tr>
-                <tr>
-                    @foreach (var x in lista12)
-                    {
-                        <td>@x.Numero <input type="checkbox" id="@x.Numero" checked name="@x.Vendido" /></td>
-                    }
-                </tr>
-                <tr>
-                    @foreach (var x in lista13)
-                    {
-                        <td>@x.Numero <input type="checkbox" id="@x.Numero" checked name="@x.Vendido" /></td>
-                    }
-                </tr>
-                <tr>
-                    @foreach (var x in lista14)
-                    {
-                        <td>@x.Numero <input type="checkbox" id="@x.Numero" checked name="@x.Vendido" /></td>
-                    }
-                </tr>
-                <tr>
-                    @foreach (var x in lista15)
-                    {
-                        <td>@x.Numero <input type="checkbox" id="@x.Numero" checked name="@x.Vendido" /></td>
+                        <input type="text" value="@x.Vendido" style="display: none" />
+
+                        @if (x.Vendido == true)
+                        {
+                            <td>@x.Numero <input type="checkbox" checked  /></td>
+                        }
+                        else
+                        {
+                            <td>@x.Numero <input type="checkbox" disabled /></td>
+                        }
                     }
                 </tr>
             </tbody>
         </table>
-        <input type="submit" />
-        </col>
-    </div>*@
+       
+    </div>
 
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script>
+
+  
+     $(document).ready(function () {
+        var resposta = document.getElementById("r").value;
+        var respostaa = document.getElementById("res").value;
+        if (resposta == 1) {
+            alert("Numeros ja vendidos: " + respostaa);
+        }
+     });
+
 
     function AtualizarPermissoes(sender, id) {
         var inputAtivo = $('#permissao-' + id);
