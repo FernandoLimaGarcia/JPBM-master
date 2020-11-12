@@ -10,17 +10,17 @@ namespace JPBM
         public Rifa()
         {
         }
-        public Rifa(int id, int numero, string nome, bool pago, bool vendido)
+        public Rifa(int id, int numero, int nomeId, bool pago, bool vendido)
         {
             Id = id;
             Numero = numero;
-            Nome = nome;
+            NomeId = nomeId;
             Pago = pago;
             Vendido = vendido;
         }
         public int Id { get; set; }
         public int Numero { get; set; }
-        public string Nome { get; set; }
+        public int NomeId { get; set; }
         public bool Pago { get; set; }
         public bool Vendido { get; set; }
     }

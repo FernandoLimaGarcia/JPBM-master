@@ -4,6 +4,7 @@
     ViewData["Title"] = "Home Page";
     var res = ViewBag.res;
     var r = ViewBag.r;
+    var listaUsuarios = ViewBag.listaUsuarios as List<JPBM.Entidades.Usuarios>;
     var lista1 = ViewData["Lista1"] as List<Rifa>;
     var lista2 = ViewData["Lista2"] as List<Rifa>;
     var lista3 = ViewData["Lista3"] as List<Rifa>;
@@ -37,7 +38,13 @@
         <label>Digite os numeros separados por virgula: exp: 1,45,32,58 </label>
         <input type="text" id="numero" asp-for="Numeros"/>
         <label> Digite o nome do comprardor: </label>
-        <input type="text" id="nome" asp-for="Nome"/>
+        <input type="hidden" id="nome" asp-for="NomeId"/>
+        <select id="nomes">
+            @foreach(var x in listaUsuarios)
+            {
+                <option>@x.Nome</option>
+            }
+        </select>
         <label> Esta pago ? </label>
         <input type="checkbox" id="pago" asp-for="Pago"/>
 

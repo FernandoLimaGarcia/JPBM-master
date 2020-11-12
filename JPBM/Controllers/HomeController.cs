@@ -19,6 +19,7 @@ namespace JPBM.Controllers
             {
 
                 RifaRepository c = new RifaRepository();
+                UsuarioRepository u = new UsuarioRepository();
                 var listaNumeros = c.GetAll();
 
                 if (rifa.Nome != null || rifa.Numeros != null)
@@ -40,14 +41,13 @@ namespace JPBM.Controllers
                                 else
                                 {
                                     Rifa r = new Rifa();
-                                    r.Nome = rifa.Nome;
+                                    r.NomeId = rifa.NomeId;
                                     r.Pago = rifa.Pago;
                                     r.Vendido = true;
                                     r.Numero = ln.Numero;
 
                                     c.Update(r);
                                 }
-
                             }
                         }
                     }
@@ -65,6 +65,7 @@ namespace JPBM.Controllers
                     ViewData["Lista" + aux] = lista;
                     aux++;
                 }
+                ViewBag.listaUsuarios = u.GetAll();
             }
             catch(Exception e)
             {
@@ -75,6 +76,7 @@ namespace JPBM.Controllers
                 }
 
                 RifaRepository c = new RifaRepository();
+                UsuarioRepository u = new UsuarioRepository();
                 var listas = c.ListaOrdenada();
                 var aux = 1;
                 foreach (var lista in listas)
@@ -82,6 +84,7 @@ namespace JPBM.Controllers
                     ViewData["Lista" + aux] = lista;
                     aux++;
                 }
+                ViewBag.listaUsuarios = u.GetAll();
             }
 
             //for (var x = 1; x <= 150; x++)

@@ -18,7 +18,7 @@ namespace JPBM
 
         public void Add(Rifa rifa)
         {
-            string sql = "INSERT INTO Rifa(numero, pago, nome, vendido) VALUES(@Numero, @Pago, @Nome, @Vendido)";
+            string sql = "INSERT INTO Rifa(numero, pago, nomeID, vendido) VALUES(@Numero, @Pago, @NomeId, @Vendido)";
 
             using (var con = new SqlConnection(GetSQLConnection()))
             {
@@ -28,7 +28,7 @@ namespace JPBM
                     var command = new SqlCommand(sql, con);
                     command.Parameters.AddWithValue("@Numero", rifa.Numero);
                     command.Parameters.AddWithValue("@Pago", rifa.Pago);
-                    command.Parameters.AddWithValue("@Nome", rifa.Nome);
+                    command.Parameters.AddWithValue("@Nome", rifa.NomeId);
                     command.Parameters.AddWithValue("@Vendido", rifa.Vendido);
 
                     command.ExecuteReader();
@@ -46,7 +46,7 @@ namespace JPBM
         public void Update(Rifa rifa)
         {
            
-            string sql = "UPDATE dbo.RIFA SET pago=@Pago, nome=@Nome, vendido = @Vendido WHERE numero = @Numero";
+            string sql = "UPDATE dbo.RIFA SET pago=@Pago, nomeID=@Nome, vendido = @Vendido WHERE numero = @Numero";
 
             using (var con = new SqlConnection(GetSQLConnection()))
             {
@@ -55,7 +55,7 @@ namespace JPBM
                     con.Open();
                     var command = new SqlCommand(sql, con);
                     command.Parameters.AddWithValue("@Pago", rifa.Pago);
-                    command.Parameters.AddWithValue("@Nome", rifa.Nome);
+                    command.Parameters.AddWithValue("@Nome", rifa.NomeId);
                     command.Parameters.AddWithValue("@Vendido", rifa.Vendido);
                     command.Parameters.AddWithValue("@Numero", rifa.Numero);
 
@@ -87,7 +87,7 @@ namespace JPBM
                     {
                         while (reader.Read())
                         {
-                            rifas.Add(new Rifa((int)reader["id"], (int)reader["numero"], reader["nome"].ToString(), (bool)reader["pago"], (bool)reader["vendido"]) { });
+                            rifas.Add(new Rifa((int)reader["id"], (int)reader["numero"], (int)reader["nomeID"], (bool)reader["pago"], (bool)reader["vendido"]) { });
                         }
                     }
                     con.Close(); con.Dispose();
@@ -116,7 +116,7 @@ namespace JPBM
                 if (x1 <= aux1)
                 {
                     Rifa r = new Rifa();
-                    r.Nome = l.Nome;
+                    r.NomeId = l.NomeId;
                     r.Numero = l.Numero;
                     r.Pago = l.Pago;
                     r.Vendido = l.Vendido;
@@ -128,7 +128,7 @@ namespace JPBM
                     listaS.Add(lista);
                     lista = new List<Rifa>();
                     Rifa r = new Rifa();
-                    r.Nome = l.Nome;
+                    r.NomeId = l.NomeId;
                     r.Numero = l.Numero;
                     r.Pago = l.Pago;
                     r.Vendido = l.Vendido;
