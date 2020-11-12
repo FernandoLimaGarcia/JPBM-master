@@ -10,6 +10,6 @@ namespace JPBM.Models
         public string Numeros {get;set;}
         public string Nome {get;set;}
         public bool Pago {get;set;}
-        public List<Vendas> vendas { get; set; }
+       
     }
 }

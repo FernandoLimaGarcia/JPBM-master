@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace JPBM
 {
-    public class Conexao
+    public class RifaRepository
     {
         public static string SQLConnection { get; private set; }
         public static string GetSQLConnection()

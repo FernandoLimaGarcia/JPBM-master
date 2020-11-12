@@ -5,6 +5,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using JPBM.Models;
+using JPBM.Repository;
+using JPBM.Entidades;
 
 namespace JPBM.Controllers
 {
@@ -12,52 +14,75 @@ namespace JPBM.Controllers
     {
         public IActionResult Index(RifaViewModel rifa)
         {
+            var res = 0;
+            try
+            {
 
-            Conexao c = new Conexao();
-            var listaNumeros = c.GetAll();
+                RifaRepository c = new RifaRepository();
+                var listaNumeros = c.GetAll();
 
-            if(rifa.Nome != null && rifa.Numeros != null){
-                var numeros = rifa.Numeros.Split(",");
-                var res = 0;
-                var x = new List<int>();
-                foreach (var n in numeros)
+                if (rifa.Nome != null || rifa.Numeros != null)
                 {
-                    foreach (var ln in listaNumeros)
+                    var numeros = rifa.Numeros.Split(",");
+                    
+                    var x = new List<int>();
+                    foreach (var n in numeros)
                     {
-                        if (ln.Numero == Convert.ToInt32(n))
+                        foreach (var ln in listaNumeros)
                         {
-                            if (ln.Vendido == true)
+                            if (ln.Numero == Convert.ToInt32(n))
                             {
-                                res = 1;
-                                x.Add(ln.Numero);
-                                ViewBag.r = 1;
-                            }
-                            else
-                            {
-                                Rifa r = new Rifa();
-                                r.Nome = rifa.Nome;
-                                r.Pago = rifa.Pago;
-                                r.Vendido = true;
-                                r.Numero = ln.Numero;
+                                if (ln.Vendido == true)
+                                {
+                                    res = 1;
+                                    x.Add(ln.Numero);
+                                }
+                                else
+                                {
+                                    Rifa r = new Rifa();
+                                    r.Nome = rifa.Nome;
+                                    r.Pago = rifa.Pago;
+                                    r.Vendido = true;
+                                    r.Numero = ln.Numero;
 
-                                c.Update(r);
-                            }
+                                    c.Update(r);
+                                }
 
+                            }
                         }
                     }
+
+                    var result = String.Join(", ", x.ToArray());
+
+                    ViewBag.r = result;
+                    
+                   
+                }
+                var listas = c.ListaOrdenada();
+                var aux = 1;
+                foreach (var lista in listas)
+                {
+                    ViewData["Lista" + aux] = lista;
+                    aux++;
+                }
+            }
+            catch(Exception e)
+            {
+                
+                if(e.Message == "Input string was not in a correct format.")
+                {
+                    res = 2;
                 }
 
-                
-
-
-                var result = String.Join(", ", x.ToArray());
-
-                ViewBag.r = result;
-                ViewBag.res = res;
+                RifaRepository c = new RifaRepository();
+                var listas = c.ListaOrdenada();
+                var aux = 1;
+                foreach (var lista in listas)
+                {
+                    ViewData["Lista" + aux] = lista;
+                    aux++;
+                }
             }
-
-           
-
 
             //for (var x = 1; x <= 150; x++)
             //{
@@ -68,24 +93,40 @@ namespace JPBM.Controllers
             //    r.Vendido = false;
             //    c.Add(r);
             //}
-
-            var listas = c.ListaOrdenada();
-            var aux = 1;
-            foreach (var lista in listas)
-            {
-                ViewData["Lista" + aux] = lista;
-                aux++;
-            }
+            ViewBag.res = res;
 
             return View();
         }
 
-        public IActionResult Rifas()
+        public IActionResult Usuarios()
         {
+            ViewBag.r = TempData["resp"];
             return View();
         }
+        public IActionResult CadastroUsuarios(UsuariosViewModel usuario)
+        {
+             UsuarioRepository r = new UsuarioRepository();
+            var usuarios = r.GetAll();
+            var res = 0;
+            foreach(var u in usuarios)
+            {
+                if (!u.Email.Equals(usuario.Email))
+                {
+                    r.Add(new Usuarios(usuario.Nome, usuario.Telefone, usuario.Email));
+                }
+                else
+                {
+                    res = 1;
+                    TempData["resp"] = res;
+                    return RedirectToAction("Usuarios");
+                }
+            }
+            
 
-       
+            return RedirectToAction("Index");
+        }
+
+
 
         public IActionResult About()
         {

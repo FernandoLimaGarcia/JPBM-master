@@ -29,7 +29,7 @@
     <form method="post" enctype="multipart/form-data" asp-controller="Home" asp-action="Index">
     <div class="text-center">
         <h1 class="display-4">Rifa - Juntos por um bem Maior</h1>
-
+        <a asp-controller="Home" asp-action="Usuarios" >Cadastro de Usuário</a>
     </div>
 
 
@@ -217,9 +217,11 @@
      $(document).ready(function () {
         var resposta = document.getElementById("r").value;
         var respostaa = document.getElementById("res").value;
-        if (resposta == 1) {
-            alert("Numeros ja vendidos: " + respostaa);
-        }
+         if (resposta == 1) {
+             alert("Numeros ja vendidos: " + respostaa);
+         } else if(resposta == 2){
+             alert("Informe apenas numeros no campo de numeros.");
+         }
      });
 
 
